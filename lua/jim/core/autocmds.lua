@@ -1,7 +1,7 @@
 local autocmd = vim.api.nvim_create_autocmd
 
 
-vim.api.nvim_create_autocmd("BufWritePre", {
+autocmd("BufWritePre", {
   pattern = "*.py",
   callback = function()
     local buf = vim.api.nvim_get_current_buf()
