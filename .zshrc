@@ -115,8 +115,6 @@ eval ``keychain --eval --agents ssh id_rsa
 export PATH="/usr/local/cuda-12.0/bin:$PATH"
 export LD_LIBRARY_PATH="/usr/local/cuda-12.0/lib64:$LD_LIBRARY_PATH"
 
-export NEPTUNE_API_TOKEN="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vbmV3LXVpLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9uZXctdWkubmVwdHVuZS5haSIsImFwaV9rZXkiOiI1NjFkNzZhZi1jNzA2LTRkYmUtYjgzYS1lMTFjOTdiZWU4MGIifQ=="
-
 export PATH="$HOME/.local/bin:$PATH"
 
 export PYENV_ROOT="$HOME/.pyenv"
