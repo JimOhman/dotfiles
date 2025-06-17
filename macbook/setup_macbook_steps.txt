@@ -1,0 +1,46 @@
+# install brew as OSX package manager
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.zprofile && source ~/.zprofile
+
+# install neovim as text editor
+brew install neovim
+
+# install pyenv as python environment manager
+brew install pyenv
+
+# install python versions (might need other dependencies first?)
+pyenv install 3.10
+pyenv install 3.8
+
+# install pipx as python package manager
+brew install pipx
+
+# install poetry as
+pipx install poetry
+
+# install git for version control
+brew install git
+
+# generate ssh keys and add to GitHub
+ssh-keygen -t rsa
+
+# install Spotify, because music
+brew install --cask spotify
+
+# remap copy/paste to ctrl-c/ctrl-v
+create a file called DeafultKeyBinding.dict with the mappings in Library/KeyBindings
+
+# switch option key to command key in preferences (probably change this)
+
+# install oh-my-zsh
+
+# install zsh-autosuggestions
+
+# turn off keyboard input autocomplete and all that crap
+
+# disable stuff to prevent oh-my-zsh git plugin from being slow in large repos
+git config --add oh-my-zsh.hide-status 1
+git config --add oh-my-zsh.hide-dirty 1
+
+# install iterm2
