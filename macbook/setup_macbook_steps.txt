@@ -1,7 +1,15 @@
+# set system theme to dark under settings
+
+# change key repeat speed
+defaults write -g InitialKeyRepeat -float 10.0
+defaults write -g KeyRepeat -float 1.0
+
 # install brew as OSX package manager
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.zprofile && source ~/.zprofile
+
+# brew install node
 
 # install neovim as text editor
 brew install neovim
@@ -10,32 +18,39 @@ brew install neovim
 brew install pyenv
 
 # install python versions (might need other dependencies first?)
+pyenv install 3.12
 pyenv install 3.10
 pyenv install 3.8
+pyenv global 3.12 # set global version
 
 # install pipx as python package manager
 brew install pipx
 
 # install poetry as
 pipx install poetry
+poetry config virtualenvs.in-project true # set so that .venv is installed in project dir
 
 # install git for version control
 brew install git
+
+# create github dir under username/Documents
 
 # generate ssh keys and add to GitHub
 ssh-keygen -t rsa
 
 # install Spotify, because music
-brew install --cask spotify
+brew install --cask spotify (or use browser)
 
-# remap copy/paste to ctrl-c/ctrl-v
-create a file called DeafultKeyBinding.dict with the mappings in Library/KeyBindings
+# remap copy/paste/cut to ctrl-c/ctrl-v/ctrl-x
+do this by adding keyboard shortcuts for Copy, Paste, Cut, you have to add them manually
 
-# switch option key to command key in preferences (probably change this)
+# bind caps-lock to ctrl key to command key in preferences
 
-# install oh-my-zsh
+# bind option key to command key in preferences
 
-# install zsh-autosuggestions
+# install oh-my-zsh (from curl)
+
+# install zsh-autosuggestions (from curl)
 
 # turn off keyboard input autocomplete and all that crap
 
@@ -43,4 +58,35 @@ create a file called DeafultKeyBinding.dict with the mappings in Library/KeyBind
 git config --add oh-my-zsh.hide-status 1
 git config --add oh-my-zsh.hide-dirty 1
 
-# install iterm2
+# install iterm2 (from curl)
+    - in profile (keys): map previous tab, next tab and duplicate tab to ctrl + shift (l and r, and t)
+    - in profile (general): set working directory to github
+    - in profile (colors): set mode to dark
+    - in profile (text): change cursor style to underline
+    - in general (selection): uncheck the option: Clicking on a command selects it to restrict Find and Filter
+    - in profile (session): select always on prompt before closing
+
+# install sublime (from curl)
+    - to make sublime the default opener for certain files, do it under (get info) on such a file
+
+# nvim plugins are installed on start-up after .config/nvim/lua/your_profile has been copied over
+
+# make finder always show hidden files
+defaults write com.apple.finder AppleShowAllFiles TRUE
+killall Finder
+
+# install lazygit to be able to use it in nvim
+brew install lazygit
+
+
+# install ripgrep for telescope
+brew install ripgrep
+
+# install fd for fast system file-search (and for telescope)
+brew install fd
+
+# install go-lang
+brew install go
+
+# install nerd font and activate it in iTerm2, also used for nvim-tree icons
+brew install font-hack-nerd-font

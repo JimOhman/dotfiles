@@ -16,6 +16,9 @@ saga.setup({
   --     normal_bg = "#0f0f0f",
   --   },
   -- },
+  lightbulb = {
+    enable = false,
+  },
   finder = {
     max_height = 0.6,
     keys = {

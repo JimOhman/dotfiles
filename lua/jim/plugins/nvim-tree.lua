@@ -37,9 +37,9 @@ nvimtree.setup({
   -- 		ignore = false,
   -- 	},
   view = {
-      -- side = 'right',
+      side = 'right',
       signcolumn = 'no',
-      -- width = 60,
+      width = 80,
   },
   filters = {
       exclude = {'.DS_Store'},
