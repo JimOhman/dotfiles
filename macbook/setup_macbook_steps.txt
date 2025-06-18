@@ -90,3 +90,5 @@ brew install go
 
 # install nerd font and activate it in iTerm2, also used for nvim-tree icons
 brew install font-hack-nerd-font
+
+# install nvim github copilot from https://github.com/github/copilot.vim and run :Copilot setup in nvim
