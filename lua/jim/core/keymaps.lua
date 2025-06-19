@@ -98,3 +98,13 @@ api.nvim_set_keymap("i", "{", "{}<left>", { noremap = true })
 keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>") -- got to declaration
 keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>") -- see definition and make edits in window
 keymap.set("n", "<leader>d", "<cmd>Lspsaga show_line_diagnostics<CR>") -- show  diagnostics for line
+
+-- Copilot keymaps
+keymap.set("n", "<leader>cc", ":CopilotChatToggle<CR>", { desc = "Toggle Copilot Chat" })
+keymap.set("n", "<leader>cs", ":CopilotChatStop<CR>", { desc = "Stop Copilot Chat" })
+keymap.set("n", "<leader>ce", ":CopilotChatExplain<CR>", { desc = "Copilot Explain Selected" })
+keymap.set("v", "<leader>ce", ":CopilotChatExplain<CR>", { desc = "Copilot Explain Selected" })
+keymap.set("n", "<leader>cr", ":CopilotChatReview<CR>", { desc = "Copilot Review Selected" })
+keymap.set("v", "<leader>cr", ":CopilotChatReview<CR>", { desc = "Copilot Review Selected" })
+keymap.set("n", "<leader>cd", ":CopilotChatDocs<CR>", { desc = "Copilot Generate Docs" })
+keymap.set("v", "<leader>cd", ":CopilotChatDocs<CR>", { desc = "Copilot Generate Docs" })

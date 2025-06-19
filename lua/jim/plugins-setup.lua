@@ -99,6 +99,27 @@ return packer.startup(function(use)
   }) -- enhanced lsp uis
   use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 
+  use {
+      'CopilotC-Nvim/CopilotChat.nvim',
+      dependencies = {
+          { 'github/copilot.vim' }, -- or 'zbirenbaum/copilot.lua' as an alternative
+          { 'nvim-lua/plenary.nvim', branch = 'master' }, -- for curl, log, and async functions
+      },
+      build = 'make tiktoken', -- Required for MacOS or Linux to build tiktoken
+      opts = {
+          -- Optional configuration (see below for customization)
+          debug = false, -- Enable debugging (set to true for troubleshooting)
+          show_help = true, -- Show help actions
+          window = {
+              layout = 'float', -- Options: 'float', 'vertical', 'horizontal'
+          },
+          auto_follow_cursor = false, -- Don't follow cursor after response
+      },
+      config = function(_, opts)
+          require('CopilotChat').setup(opts)
+      end,
+  }
+
   if packer_bootstrap then
     require("packer").sync()
   end
