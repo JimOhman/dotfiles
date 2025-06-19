@@ -5,13 +5,14 @@ local api = vim.api
 local fn = vim.fn
 local telescope = require("telescope.builtin")
 
--- Helper function to get the Git root directory
-local function get_git_root()
-  local git_dir = fn.finddir('.git', fn.expand('%:p:h') .. ';')
-  if git_dir == '' then
-    return fn.getcwd() -- Fallback to current working directory if not in a Git repo
+-- Helper function to get the first subrepo Git root directory
+local function get_first_subrepo_git_root()
+  local cwd = fn.getcwd()
+  local dirs = vim.fn.globpath(cwd, "*/.git", 0, 1)
+  if #dirs > 0 then
+    return fn.fnamemodify(dirs[1], ":h")
   end
-  return fn.fnamemodify(git_dir, ':h')
+  return cwd -- fallback to current working directory if no subrepo found
 end
 
 -- use jk to exit insert mode
@@ -51,14 +52,14 @@ keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>")
 keymap.set("n", "<leader>pb", "<cmd>Telescope buffers<cr>")
 keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
 keymap.set("n", "<leader>pf", function()
-  telescope.find_files({ cwd = get_git_root() })
-end, { desc = "Find files in Git repo root" })
+  telescope.find_files({ cwd = get_first_subrepo_git_root() })
+end, { desc = "Find files in first subrepo" })
 keymap.set("n", "<leader>ps", function()
-  telescope.live_grep({ cwd = get_git_root() })
-end, { desc = "Live grep in Git repo root" })
+  telescope.live_grep({ cwd = get_first_subrepo_git_root() })
+end, { desc = "Live grep in first subrepo" })
 keymap.set("n", "<leader>pw", function()
-  telescope.grep_string({ cwd = get_git_root() })
-end, { desc = "Grep string in Git repo root" })
+  telescope.grep_string({ cwd = get_first_subrepo_git_root() })
+end, { desc = "Grep string in first subrepo" })
 
 -- lazygit
 keymap.set("n", "<leader>gg", ":LazyGit<cr>")

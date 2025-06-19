@@ -117,7 +117,7 @@ bindkey '^i' beginning-of-line
 # alias nvim='~/nvim.appimage'
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/jimo/.mujoco/mujoco210/bin
-export BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
+# export BROWSER="/Applications/Safari.app/Contents/MacOS/Safari"
 
 eval ``keychain --eval ssh id_rsa
 
