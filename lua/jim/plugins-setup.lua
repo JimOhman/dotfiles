@@ -107,16 +107,31 @@ return packer.startup(function(use)
       },
       build = 'make tiktoken', -- Required for MacOS or Linux to build tiktoken
       opts = {
-          -- Optional configuration (see below for customization)
-          debug = false, -- Enable debugging (set to true for troubleshooting)
-          show_help = true, -- Show help actions
-          window = {
-              layout = 'float', -- Options: 'float', 'vertical', 'horizontal'
-          },
-          auto_follow_cursor = false, -- Don't follow cursor after response
       },
       config = function(_, opts)
-          require('CopilotChat').setup(opts)
+          require('CopilotChat').setup({
+              -- Optional configuration (see below for customization)
+              debug = false, -- Enable debugging (set to true for troubleshooting)
+              show_help = true, -- Show help actions
+              window = {
+                  layout = 'float', -- Options: 'float', 'vertical', 'horizontal'
+              },
+              auto_follow_cursor = false, -- Don't follow cursor after response
+              mappings = {
+                -- Override close to use <Esc> in normal mode and disable in insert mode
+                close = {},
+                -- Keep some defaults unchanged (e.g., reset)
+                reset = {
+                  normal = '<C-r>',
+                  insert = nil,
+                },
+                -- Add or modify other mappings as needed
+                complete = {
+                  insert = nil
+                },
+              },
+            }
+        )
       end,
   }
 
