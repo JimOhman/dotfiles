@@ -41,6 +41,10 @@ nvimtree.setup({
       signcolumn = 'no',
       width = 40,
   },
+  update_focused_file = {
+      enable = true,
+      update_cwd = false,
+  },
   filters = {
       exclude = {'.DS_Store'},
   }

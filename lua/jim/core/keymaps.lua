@@ -103,10 +103,6 @@ keymap.set("n", "<leader>d", "<cmd>Lspsaga show_line_diagnostics<CR>") -- show  
 -- Copilot keymaps
 keymap.set("n", "<leader>cc", ":CopilotChatToggle<CR>", { desc = "Toggle Copilot Chat" })
 keymap.set("n", "<leader>cs", ":CopilotChatStop<CR>", { desc = "Stop Copilot Chat" })
-keymap.set("v", "<leader>ce", ":CopilotChatExplain<CR>", { desc = "Copilot Explain Selected" })
-keymap.set("v", "<leader>cr", ":CopilotChatReview<CR>", { desc = "Copilot Review Selected" })
-keymap.set("v", "<leader>cd", ":CopilotChatDocs<CR>", { desc = "Copilot Generate Docs" })
-
 
 vim.g.copilot_no_tab_map = true
 vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })

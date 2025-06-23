@@ -1,4 +1,3 @@
--- auto install packer if not installed
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -41,6 +40,9 @@ return packer.startup(function(use)
 
   -- preferred colorscheme
   use("gruvbox-community/gruvbox")
+
+  -- rose-pine colorscheme
+  use("rose-pine/neovim")
 
   -- buffer surfing that respects history
   use("ton/vim-bufsurf")
@@ -86,6 +88,20 @@ return packer.startup(function(use)
   use("williamboman/mason.nvim") -- in charge of managing lsp servers, linters & formatters
   use("williamboman/mason-lspconfig.nvim") -- bridges gap b/w mason & lspconfig
 
+  -- Add nvim-treesitter with proper configuration for code highlighting
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = function()
+      require("nvim-treesitter.install").update({ with_sync = true })
+    end,
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = { "markdown", "markdown_inline", "lua", "python", "javascript", "typescript", "json" },
+        highlight = { enable = true },
+      })
+    end,
+  })
+
   -- configuring lsp servers
   use("neovim/nvim-lspconfig") -- easily configure language servers
   use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
@@ -99,6 +115,19 @@ return packer.startup(function(use)
   }) -- enhanced lsp uis
   use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 
+  use({
+      'MeanderingProgrammer/render-markdown.nvim',
+      after = { 'nvim-treesitter' },
+      -- requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
+      -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
+      requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+      config = function()
+          require('render-markdown').setup({
+              file_types = { 'markdown', 'copilot-chat' },
+          })
+      end,
+  })
+
   use {
       'CopilotC-Nvim/CopilotChat.nvim',
       dependencies = {
@@ -111,12 +140,32 @@ return packer.startup(function(use)
       config = function(_, opts)
           require('CopilotChat').setup({
               -- Optional configuration (see below for customization)
+              model = 'claude-3.7-sonnet-thought',
               debug = false, -- Enable debugging (set to true for troubleshooting)
-              show_help = true, -- Show help actions
+              show_help = false, -- Show help actions
+              context = "buffers",
               window = {
-                  layout = 'float', -- Options: 'float', 'vertical', 'horizontal'
+                layout = 'float',
+                relative = 'cursor',
+                width = 0.5,
+                height = 0.5,
+                row = 1,
+                col = 1,
+                border = 'rounded',
               },
-              auto_follow_cursor = false, -- Don't follow cursor after response
+              prompts = {
+                -- Add custom prompt templates
+                Explain = "Explain how this code works in detail:",
+                Refactor = "Refactor this code to improve performance and readability:",
+                FixBug = "Identify potential bugs in this code and suggest fixes:",
+                Optimize = "Optimize this code for better performance:",
+                Document = "Write comprehensive documentation for this code:",
+              },
+              show_user_prompts = true,      -- Show user prompts in chat
+              show_system_prompts = false,   -- Hide system prompts
+              line_numbers = false,           -- Show line numbers in code blocks
+              code_theme = "rose-pine",      -- Match rose-pine theme
+              auto_follow_cursor = true,
               mappings = {
                 -- Override close to use <Esc> in normal mode and disable in insert mode
                 close = {},
@@ -130,6 +179,7 @@ return packer.startup(function(use)
                   insert = nil
                 },
               },
+              highlight_headers = true,
             }
         )
       end,

@@ -92,3 +92,6 @@ brew install go
 brew install font-hack-nerd-font
 
 # install nvim github copilot from https://github.com/github/copilot.vim and run :Copilot setup in nvim
+
+# install podman (drop-in replacement for docker (allows no sudo)
+brew install podman
